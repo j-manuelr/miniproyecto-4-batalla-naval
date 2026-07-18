@@ -1,9 +1,18 @@
 package com.example.navalbattle;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
+import static javafx.application.Application.launch;
+
+public class Main extends Application {
+
+    @Override
+    public  void start (Stage stage){
+        stage.setTitle("Batalla Naval");
+        stage.show();
+    }
     public static void main(String[] args) {
-        Application.launch(HelloApplication.class, args);
+        launch(args);
     }
 }
