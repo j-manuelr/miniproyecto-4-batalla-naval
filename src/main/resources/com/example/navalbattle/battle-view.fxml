@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane minHeight="740.0" minWidth="1120.0" prefHeight="740.0" prefWidth="1120.0" stylesheets="@battle-view.css"
+            xmlns="http://javafx.com/javafx/17.0.14" xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <VBox prefWidth="210.0" spacing="14.0" styleClass="side-panel">
+            <padding>
+                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+            </padding>
+
+            <Button fx:id="newGameButton" maxWidth="Infinity" text="Nueva partida"/>
+
+            <Separator/>
+
+            <VBox spacing="10.0">
+                <Label text="Flota" styleClass="section-title"/>
+                <ListView fx:id="fleetListView" prefHeight="150.0">
+                    <placeholder>
+                        <VBox alignment="CENTER" spacing="7.0">
+                            <Label text="Flota requerida"/>
+                            <Label text="1 portaaviones (4)"/>
+                            <Label text="2 submarinos (3)"/>
+                            <Label text="3 destructores (2)"/>
+                            <Label text="4 fragatas (1)"/>
+                        </VBox>
+                    </placeholder>
+                </ListView>
+                <Button fx:id="startGameButton" maxWidth="Infinity" text="Comenzar"/>
+            </VBox>
+
+            <Separator/>
+
+            <VBox spacing="10.0">
+                <CheckBox fx:id="showEnemyBoardCheckBox" text="Ver flota enemiga"/>
+            </VBox>
+
+            <VBox spacing="9.0" VBox.vgrow="ALWAYS">
+                <Label text="Leyenda" styleClass="section-title"/>
+                <GridPane hgap="10.0" vgap="9.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="32.0" prefWidth="32.0"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+                    <Rectangle arcHeight="4.0" arcWidth="4.0" fill="#4b5563" height="18.0" width="28.0"/>
+                    <Label text="Barco" GridPane.columnIndex="1"/>
+                    <Text text="X" styleClass="water-mark" GridPane.rowIndex="1"/>
+                    <Label text="Agua" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Circle fill="#f59e0b" radius="8.0" GridPane.rowIndex="2"/>
+                    <Label text="Tocado" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                    <Rectangle arcHeight="4.0" arcWidth="4.0" fill="#991b1b" height="18.0" width="28.0" GridPane.rowIndex="3"/>
+                    <Label text="Hundido" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                </GridPane>
+            </VBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="0.0" styleClass="content">
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+            </padding>
+
+            <HBox spacing="12.0" VBox.vgrow="ALWAYS">
+                <VBox spacing="10.0" styleClass="board-section" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <Label text="Posicion" styleClass="board-title"/>
+                        <Label text="Jugador" styleClass="board-tag"/>
+                    </HBox>
+                    <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
+                        <Pane fx:id="playerBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane">
+                            <children>
+                                <Rectangle height="380.0" width="380.0" styleClass="board-background"/>
+                                <GridPane gridLinesVisible="true" prefHeight="380.0" prefWidth="380.0" styleClass="board-grid">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
+                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
+                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
+                                    </rowConstraints>
+                                </GridPane>
+                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="42.0" layoutY="42.0" width="144.0" styleClass="ship-shape"/>
+                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="106.0" layoutX="232.0" layoutY="118.0" width="30.0" styleClass="ship-shape"/>
+                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="80.0" layoutY="270.0" width="68.0" styleClass="ship-shape"/>
+                                <Text layoutX="277.0" layoutY="68.0" text="X" styleClass="water-mark"/>
+                                <Circle centerX="133.0" centerY="57.0" radius="8.0" styleClass="hit-mark"/>
+                                <Line endX="144.0" endY="285.0" startX="84.0" startY="285.0" styleClass="sunk-line"/>
+                            </children>
+                        </Pane>
+                    </StackPane>
+                </VBox>
+
+                <VBox spacing="10.0" styleClass="board-section" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
+                        <Label text="Principal" styleClass="board-title"/>
+                        <Label text="Maquina" styleClass="board-tag"/>
+                    </HBox>
+                    <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
+                        <Pane fx:id="enemyBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane">
+                            <children>
+                                <Rectangle height="380.0" width="380.0" styleClass="board-background"/>
+                                <GridPane gridLinesVisible="true" prefHeight="380.0" prefWidth="380.0" styleClass="board-grid">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
+                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
+                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
+                                    </rowConstraints>
+                                </GridPane>
+                                <Pane fx:id="enemyVerificationOverlayPane" visible="false">
+                                    <children>
+                                        <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="194.0" layoutY="232.0" opacity="0.55" width="144.0" styleClass="enemy-ship-shape"/>
+                                        <Rectangle arcHeight="6.0" arcWidth="6.0" height="106.0" layoutX="80.0" layoutY="42.0" opacity="0.55" width="30.0" styleClass="enemy-ship-shape"/>
+                                    </children>
+                                </Pane>
+                                <Text layoutX="49.0" layoutY="68.0" text="X" styleClass="water-mark"/>
+                                <Text layoutX="163.0" layoutY="144.0" text="X" styleClass="water-mark"/>
+                                <Circle centerX="209.0" centerY="247.0" radius="8.0" styleClass="hit-mark"/>
+                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="270.0" layoutY="308.0" width="30.0" styleClass="sunk-ship"/>
+                            </children>
+                        </Pane>
+                    </StackPane>
+                </VBox>
+            </HBox>
+
+        </VBox>
+    </center>
+</BorderPane>
