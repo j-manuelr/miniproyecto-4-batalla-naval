@@ -130,6 +130,6 @@ public class SerializedGameRepository implements GameRepository {
     }
 
     private Path fileFor(String nickname) {
-        return savesDirectory.resolve(FILE_PREFIX + nickname + FILE_SUFFIX);
+        return savesDirectory.resolve(FILE_PREFIX + SafeFileNames.sanitize(nickname) + FILE_SUFFIX);
     }
 }
