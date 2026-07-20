@@ -15,7 +15,8 @@ public class MachinePlayer extends Player {
     private final ShotStrategy shotStrategy;
 
     /**
-     * Creates the machine player.
+     * Creates the machine player with brand-new stats — the normal case
+     * when starting a fresh game.
      *
      * @param board        this player's own board, normally filled by a
      *                     {@code FleetPlacementStrategy} such as
@@ -24,6 +25,28 @@ public class MachinePlayer extends Player {
      */
     public MachinePlayer(Board board, ShotStrategy shotStrategy) {
         super("Machine", board);
+        this.shotStrategy = shotStrategy;
+    }
+
+    /**
+     * Creates the machine player with stats restored from a save file, so a
+     * resumed game (HU-5's "Continuar") shows the exact sunk-ship count it
+     * had when it was last saved instead of resetting to zero. Note the
+     * {@code shotStrategy} is always a fresh instance: a strategy's
+     * in-memory "hunt" state (e.g. {@code HuntTargetShotStrategy}'s queued
+     * follow-up targets) is not part of {@code GameState} and is not
+     * restored — the machine simply falls back to picking randomly for its
+     * first shot after a resume, which is a deliberate, minor trade-off
+     * rather than an oversight.
+     *
+     * @param board        this player's board, typically deserialized from
+     *                     a {@code .ser} save file
+     * @param stats        this player's stats, typically parsed from the
+     *                     companion {@code .txt} save file
+     * @param shotStrategy the strategy used to pick this player's shots
+     */
+    public MachinePlayer(Board board, PlayerStats stats, ShotStrategy shotStrategy) {
+        super(board, stats);
         this.shotStrategy = shotStrategy;
     }
 
