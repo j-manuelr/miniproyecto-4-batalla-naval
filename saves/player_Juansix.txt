@@ -1,0 +1,4 @@
+nickname=Juansix
+humanShipsSunk=0
+machineShipsSunk=0
+savedAt=2026-07-22T17:34:00.836972357
