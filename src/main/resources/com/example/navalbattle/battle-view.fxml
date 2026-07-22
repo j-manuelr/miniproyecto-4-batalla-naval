@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
@@ -86,27 +85,10 @@
                         <Label text="Jugador" styleClass="board-tag"/>
                     </HBox>
                     <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
-                        <Pane fx:id="playerBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane">
-                            <children>
-                                <Rectangle height="380.0" width="380.0" styleClass="board-background"/>
-                                <GridPane gridLinesVisible="true" prefHeight="380.0" prefWidth="380.0" styleClass="board-grid">
-                                    <columnConstraints>
-                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
-                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
-                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
-                                    </rowConstraints>
-                                </GridPane>
-                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="42.0" layoutY="42.0" width="144.0" styleClass="ship-shape"/>
-                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="106.0" layoutX="232.0" layoutY="118.0" width="30.0" styleClass="ship-shape"/>
-                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="80.0" layoutY="270.0" width="68.0" styleClass="ship-shape"/>
-                                <Text layoutX="277.0" layoutY="68.0" text="X" styleClass="water-mark"/>
-                                <Circle centerX="133.0" centerY="57.0" radius="8.0" styleClass="hit-mark"/>
-                                <Line endX="144.0" endY="285.0" startX="84.0" startY="285.0" styleClass="sunk-line"/>
-                            </children>
-                        </Pane>
+                        <!-- Vacio a proposito: GameBoardController hace
+                             playerBoardPane.getChildren().add(playerBoardView.getView())
+                             BoardView construye aqui el tablero real (fondo + grid + figuras). -->
+                        <Pane fx:id="playerBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
                     </StackPane>
                 </VBox>
 
@@ -116,31 +98,13 @@
                         <Label text="Maquina" styleClass="board-tag"/>
                     </HBox>
                     <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
-                        <Pane fx:id="enemyBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane">
-                            <children>
-                                <Rectangle height="380.0" width="380.0" styleClass="board-background"/>
-                                <GridPane gridLinesVisible="true" prefHeight="380.0" prefWidth="380.0" styleClass="board-grid">
-                                    <columnConstraints>
-                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
-                                        <ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/><ColumnConstraints percentWidth="10.0"/>
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
-                                        <RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/><RowConstraints percentHeight="10.0"/>
-                                    </rowConstraints>
-                                </GridPane>
-                                <Pane fx:id="enemyVerificationOverlayPane" visible="false">
-                                    <children>
-                                        <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="194.0" layoutY="232.0" opacity="0.55" width="144.0" styleClass="enemy-ship-shape"/>
-                                        <Rectangle arcHeight="6.0" arcWidth="6.0" height="106.0" layoutX="80.0" layoutY="42.0" opacity="0.55" width="30.0" styleClass="enemy-ship-shape"/>
-                                    </children>
-                                </Pane>
-                                <Text layoutX="49.0" layoutY="68.0" text="X" styleClass="water-mark"/>
-                                <Text layoutX="163.0" layoutY="144.0" text="X" styleClass="water-mark"/>
-                                <Circle centerX="209.0" centerY="247.0" radius="8.0" styleClass="hit-mark"/>
-                                <Rectangle arcHeight="6.0" arcWidth="6.0" height="30.0" layoutX="270.0" layoutY="308.0" width="30.0" styleClass="sunk-ship"/>
-                            </children>
-                        </Pane>
+                        <!-- Vacio a proposito: GameBoardController hace
+                             enemyBoardPane.getChildren().add(enemyBoardView.getView())
+                             y engancha enemyBoardView.setOnCellClicked(...) para HU-2.
+                             enemyVerificationOverlayPane ya no hace falta: la HU-3
+                             (ver flota enemiga) se abre como Stage aparte con su propio
+                             BoardView en modo VERIFICATION_VIEW. -->
+                        <Pane fx:id="enemyBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
                     </StackPane>
                 </VBox>
             </HBox>
