@@ -18,7 +18,8 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane minHeight="740.0" minWidth="1120.0" prefHeight="740.0" prefWidth="1120.0" stylesheets="@battle-view.css"
+<BorderPane fx:controller="com.example.navalbattle.controller.GameBoardController"
+            minHeight="740.0" minWidth="1120.0" prefHeight="740.0" prefWidth="1120.0" stylesheets="@battle-view.css"
             xmlns="http://javafx.com/javafx/17.0.14" xmlns:fx="http://javafx.com/fxml/1">
     <left>
         <VBox prefWidth="210.0" spacing="14.0" styleClass="side-panel">
@@ -26,7 +27,20 @@
                 <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
             </padding>
 
-            <Button fx:id="newGameButton" maxWidth="Infinity" text="Nueva partida"/>
+            <!-- Repurposed as "abandonar partida y volver al menú" (la partida ya autoguardó) -->
+            <Button fx:id="newGameButton" maxWidth="Infinity" text="Volver al menú"/>
+
+            <Separator/>
+
+            <!-- NUEVO: bloque de estado (HU-2/HU-5, heurística 1: visibilidad del estado del sistema) -->
+            <VBox spacing="6.0">
+                <Label text="Estado de la partida" styleClass="section-title"/>
+                <Label fx:id="turnLabel" text="Tu turno"/>
+                <Label fx:id="statusLabel" text=" "/>
+                <Label fx:id="timerLabel" text="00:00"/>
+                <Label fx:id="humanShipsSunkLabel" text="Barcos hundidos por ti: 0"/>
+                <Label fx:id="machineShipsSunkLabel" text="Barcos hundidos por la máquina: 0"/>
+            </VBox>
 
             <Separator/>
 
@@ -43,13 +57,14 @@
                         </VBox>
                     </placeholder>
                 </ListView>
-                <Button fx:id="startGameButton" maxWidth="Infinity" text="Comenzar"/>
+                <!-- Sin uso en la pantalla de batalla: la flota ya quedó fijada en HU-1 -->
+                <Button fx:id="startGameButton" maxWidth="Infinity" text="Comenzar" visible="false" managed="false"/>
             </VBox>
 
             <Separator/>
 
             <VBox spacing="10.0">
-                <CheckBox fx:id="showEnemyBoardCheckBox" text="Ver flota enemiga"/>
+                <CheckBox fx:id="showEnemyBoardCheckBox" text="Ver flota enemiga (verificación)"/>
             </VBox>
 
             <VBox spacing="9.0" VBox.vgrow="ALWAYS">
@@ -85,9 +100,8 @@
                         <Label text="Jugador" styleClass="board-tag"/>
                     </HBox>
                     <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
-                        <!-- Vacio a proposito: GameBoardController hace
-                             playerBoardPane.getChildren().add(playerBoardView.getView())
-                             BoardView construye aqui el tablero real (fondo + grid + figuras). -->
+                        <!-- GameBoardController mete aqui un
+                             BoardView(humanBoard, BoardRenderMode.OWNER_VIEW).getView() -->
                         <Pane fx:id="playerBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
                     </StackPane>
                 </VBox>
@@ -98,12 +112,9 @@
                         <Label text="Maquina" styleClass="board-tag"/>
                     </HBox>
                     <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
-                        <!-- Vacio a proposito: GameBoardController hace
-                             enemyBoardPane.getChildren().add(enemyBoardView.getView())
-                             y engancha enemyBoardView.setOnCellClicked(...) para HU-2.
-                             enemyVerificationOverlayPane ya no hace falta: la HU-3
-                             (ver flota enemiga) se abre como Stage aparte con su propio
-                             BoardView en modo VERIFICATION_VIEW. -->
+                        <!-- GameBoardController mete aqui un
+                             BoardView(machineBoard, BoardRenderMode.FOG_VIEW).getView()
+                             y engancha setOnCellClicked(...) para HU-2. -->
                         <Pane fx:id="enemyBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
                     </StackPane>
                 </VBox>

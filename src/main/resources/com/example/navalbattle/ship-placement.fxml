@@ -6,10 +6,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.battleship.controller.ShipPlacementController"
+            fx:controller="com.example.navalbattle.controller.ShipPlacementController"
             prefWidth="900" prefHeight="650">
 
     <!-- Heurística 1: Visibilidad del estado del sistema -->
@@ -20,10 +21,10 @@
         </VBox>
     </top>
 
-    <!-- Centro: El GridPane servirá como contenedor para el BoardView (SRP) -->
+    <!-- Centro: El GridPane servirá como contenedor para el tablero (SRP) -->
     <center>
         <GridPane fx:id="boardGrid" alignment="CENTER" hgap="2" vgap="2">
-            <!-- Las celdas (CellShapeFactory) se inyectarán aquí desde el controlador -->
+            <!-- Las celdas se inyectan aquí desde el controlador -->
         </GridPane>
     </center>
 
@@ -50,7 +51,7 @@
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <!-- Este botón permanece disable="true" hasta que BoardValidator confirme que la flota está completa -->
+            <!-- Este botón permanece disable="true" hasta que la flota esté completa -->
             <Button fx:id="btnStartGame" text="Iniciar Partida" onAction="#onStartGame"
                     disable="true" prefWidth="150" prefHeight="40"
                     style="-fx-font-weight: bold; -fx-base: #2ecc71;"/>
