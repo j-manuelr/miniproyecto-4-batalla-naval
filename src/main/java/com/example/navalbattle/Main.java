@@ -7,15 +7,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
-
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("battle-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1120, 740);
-        stage.setTitle("Batalla Naval");
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+
+        stage.setTitle("Batalla Naval - Menú Principal");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
