@@ -4,7 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="25.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+<VBox alignment="CENTER" spacing="25.0" prefWidth="1120" prefHeight="740"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.navalbattle.controller.MainMenuController"
       style="-fx-background-color: #f4f4f4;">
 
@@ -12,16 +13,16 @@
 
     <VBox alignment="CENTER" spacing="15.0" style="-fx-padding: 30;">
         <Button fx:id="btnNewGame" text="Nueva Partida" onAction="#onNewGame"
-                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px;"/>
+                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px; -fx-background-color: #f8f9fa; -fx-border-color: #cccccc; -fx-border-radius: 4px; -fx-cursor: hand;"/>
 
         <Button fx:id="btnContinue" text="Continuar Partida" onAction="#onContinueGame"
-                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px;"/>
+                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px; -fx-background-color: #f8f9fa; -fx-border-color: #cccccc; -fx-border-radius: 4px; -fx-cursor: hand;"/>
 
         <Button fx:id="btnHelp" text="¿Cómo Jugar?" onAction="#onHelp"
-                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px;"/>
+                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px; -fx-background-color: #f8f9fa; -fx-border-color: #cccccc; -fx-border-radius: 4px; -fx-cursor: hand;"/>
 
         <Button fx:id="btnExit" text="Salir" onAction="#onExit"
-                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px;"/>
+                prefWidth="220" prefHeight="40" style="-fx-font-size: 16px; -fx-background-color: #f8f9fa; -fx-border-color: #cccccc; -fx-border-radius: 4px; -fx-cursor: hand;"/>
     </VBox>
 
 </VBox>
