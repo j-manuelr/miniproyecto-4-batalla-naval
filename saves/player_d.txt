@@ -1,0 +1,4 @@
+nickname=d
+humanShipsSunk=6
+machineShipsSunk=4
+savedAt=2026-07-23T10:54:46.4925356

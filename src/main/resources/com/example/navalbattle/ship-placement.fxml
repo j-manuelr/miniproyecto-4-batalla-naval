@@ -11,50 +11,46 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.navalbattle.controller.ShipPlacementController"
-            prefWidth="900" prefHeight="650">
+            prefWidth="1120" prefHeight="740" style="-fx-background-color: #f4f4f4;">
 
-    <!-- Heurística 1: Visibilidad del estado del sistema -->
     <top>
         <VBox alignment="CENTER" style="-fx-padding: 20;">
-            <Label text="Fase de Preparación: Coloca tu flota" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label text="Fase de Preparación" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
             <Label fx:id="lblStatus" text="Selecciona un barco de la lista para comenzar." textFill="#555555"/>
         </VBox>
     </top>
 
-    <!-- Centro: El GridPane servirá como contenedor para el tablero (SRP) -->
     <center>
         <GridPane fx:id="boardGrid" alignment="CENTER" hgap="2" vgap="2">
-            <!-- Las celdas se inyectan aquí desde el controlador -->
+
         </GridPane>
     </center>
 
-    <!-- Derecha: Heurística 6 (Reconocimiento antes que memoria - panel visible de la flota) -->
+
     <right>
         <VBox spacing="15" style="-fx-padding: 20; -fx-background-color: #e9ecef;" prefWidth="250">
-            <Label text="Flota Disponible" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label text="Flota Disponible" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
 
-            <ListView fx:id="fleetListView" prefHeight="200"/>
+            <ListView fx:id="fleetListView" prefHeight="200" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 4px;"/>
 
-            <!-- Heurística 7 y 3: Documentación in-situ de atajos y control -->
-            <Label text="Controles:" style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
-            <Label text="• [R] o Clic Derecho: Rotar barco"/>
-            <Label text="• [Esc]: Cancelar selección"/>
-            <Label text="• Clic Izquierdo: Colocar"/>
+
+            <Label text="Controles:" style="-fx-font-weight: bold; -fx-text-fill: #333333; -fx-padding: 10 0 0 0;"/>
+            <Label text="• [R] o Clic Derecho: Rotar barco" textFill="#333333"/>
+            <Label text="• [Esc]: Cancelar selección" textFill="#333333"/>
+            <Label text="• Clic Izquierdo: Colocar" textFill="#333333"/>
         </VBox>
     </right>
 
-    <!-- Abajo: Heurística 3 (Libertad del usuario) y Heurística 5 (Prevención de errores) -->
     <bottom>
         <HBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
-            <Button text="Volver al Menú" onAction="#onBackToMenu" prefWidth="120"/>
-            <Button text="Limpiar Tablero" onAction="#onClearBoard" prefWidth="120"/>
+            <Button text="Volver al Menú" onAction="#onBackToMenu" prefWidth="120" style="-fx-background-color: #f8f9fa; -fx-border-color: #cccccc; -fx-border-radius: 4px; -fx-background-radius: 4px; -fx-cursor: hand;"/>
+            <Button text="Limpiar Tablero" onAction="#onClearBoard" prefWidth="120" style="-fx-background-color: #f8f9fa; -fx-border-color: #cccccc; -fx-border-radius: 4px; -fx-background-radius: 4px; -fx-cursor: hand;"/>
 
             <Region HBox.hgrow="ALWAYS" />
 
-            <!-- Este botón permanece disable="true" hasta que la flota esté completa -->
             <Button fx:id="btnStartGame" text="Iniciar Partida" onAction="#onStartGame"
                     disable="true" prefWidth="150" prefHeight="40"
-                    style="-fx-font-weight: bold; -fx-base: #2ecc71;"/>
+                    style="-fx-font-weight: bold; -fx-base: #2ecc71; -fx-text-fill: white; -fx-cursor: hand;"/>
         </HBox>
     </bottom>
 

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,108 +19,109 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:controller="com.example.navalbattle.controller.GameBoardController"
-            minHeight="740.0" minWidth="1120.0" prefHeight="740.0" prefWidth="1120.0" stylesheets="@battle-view.css"
+<ScrollPane fx:controller="com.example.navalbattle.controller.GameBoardController"
+            fitToWidth="true" fitToHeight="true" styleClass="root-scroll"
+            stylesheets="@battle-view.css"
             xmlns="http://javafx.com/javafx/17.0.14" xmlns:fx="http://javafx.com/fxml/1">
-    <left>
-        <VBox prefWidth="210.0" spacing="14.0" styleClass="side-panel">
-            <padding>
-                <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
-            </padding>
+    <content>
+        <BorderPane minHeight="680.0" minWidth="1040.0" prefHeight="740.0" prefWidth="1120.0">
+            <left>
+                <VBox prefWidth="250.0" spacing="14.0" styleClass="side-panel">
+                    <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+                    </padding>
 
-            <!-- Repurposed as "abandonar partida y volver al menú" (la partida ya autoguardó) -->
-            <Button fx:id="newGameButton" maxWidth="Infinity" text="Volver al menú"/>
+                    <Label text="BATALLA NAVAL" styleClass="app-title"/>
 
-            <Separator/>
+                    <Button fx:id="newGameButton" maxWidth="Infinity" text="Volver al menú"/>
 
-            <!-- NUEVO: bloque de estado (HU-2/HU-5, heurística 1: visibilidad del estado del sistema) -->
-            <VBox spacing="6.0">
-                <Label text="Estado de la partida" styleClass="section-title"/>
-                <Label fx:id="turnLabel" text="Tu turno"/>
-                <Label fx:id="statusLabel" text=" "/>
-                <Label fx:id="timerLabel" text="00:00"/>
-                <Label fx:id="humanShipsSunkLabel" text="Barcos hundidos por ti: 0"/>
-                <Label fx:id="machineShipsSunkLabel" text="Barcos hundidos por la máquina: 0"/>
-            </VBox>
+                    <Separator/>
 
-            <Separator/>
+                    <VBox spacing="6.0">
+                        <Label text="Estado de la partida" styleClass="section-title"/>
+                        <Label fx:id="turnLabel" text="Tu turno" styleClass="turn-label"/>
+                        <Label fx:id="statusLabel" text=" " wrapText="true"/>
+                        <Label fx:id="timerLabel" text="00:00" styleClass="timer-label"/>
+                        <Label fx:id="humanShipsSunkLabel" text="Barcos hundidos por ti: 0" wrapText="true"/>
+                        <Label fx:id="machineShipsSunkLabel" text="Barcos hundidos por la máquina: 0" wrapText="true"/>
+                    </VBox>
 
-            <VBox spacing="10.0">
-                <Label text="Flota" styleClass="section-title"/>
-                <ListView fx:id="fleetListView" prefHeight="150.0">
-                    <placeholder>
-                        <VBox alignment="CENTER" spacing="7.0">
-                            <Label text="Flota requerida"/>
-                            <Label text="1 portaaviones (4)"/>
-                            <Label text="2 submarinos (3)"/>
-                            <Label text="3 destructores (2)"/>
-                            <Label text="4 fragatas (1)"/>
+                    <Separator/>
+
+                    <VBox spacing="10.0">
+                        <Label text="Flota" styleClass="section-title"/>
+                        <ListView fx:id="fleetListView" prefHeight="140.0">
+                            <placeholder>
+                                <VBox alignment="CENTER" spacing="6.0">
+                                    <Label text="Flota requerida"/>
+                                    <Label text="1 portaaviones (4)"/>
+                                    <Label text="2 submarinos (3)"/>
+                                    <Label text="3 destructores (2)"/>
+                                    <Label text="4 fragatas (1)"/>
+                                </VBox>
+                            </placeholder>
+                        </ListView>
+                        <Button fx:id="startGameButton" maxWidth="Infinity" text="Comenzar" visible="false" managed="false"/>
+                    </VBox>
+
+                    <Separator/>
+
+                    <VBox spacing="10.0">
+                        <CheckBox fx:id="showEnemyBoardCheckBox" text="Ver flota enemiga (verificación)" wrapText="true"/>
+                    </VBox>
+
+                    <VBox spacing="8.0" VBox.vgrow="ALWAYS">
+                        <Label text="Leyenda" styleClass="section-title"/>
+                        <GridPane hgap="10.0" vgap="8.0">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="28.0" prefWidth="28.0"/>
+                                <ColumnConstraints hgrow="ALWAYS"/>
+                            </columnConstraints>
+                            <Rectangle height="16.0" width="26.0" styleClass="legend-ship-swatch"/>
+                            <Label text="Barco" GridPane.columnIndex="1"/>
+                            <Text text="X" styleClass="legend-water-swatch" GridPane.rowIndex="1"/>
+                            <Label text="Agua" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                            <Circle radius="7.0" styleClass="legend-hit-swatch" GridPane.rowIndex="2"/>
+                            <Label text="Tocado" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                            <Rectangle height="16.0" width="26.0" styleClass="legend-sunk-swatch" GridPane.rowIndex="3"/>
+                            <Label text="Hundido" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        </GridPane>
+                    </VBox>
+                </VBox>
+            </left>
+
+            <center>
+                <VBox spacing="0.0" styleClass="content">
+                    <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+                    </padding>
+
+                    <HBox spacing="12.0" VBox.vgrow="ALWAYS" alignment="CENTER">
+                        <VBox spacing="10.0" styleClass="board-section" HBox.hgrow="ALWAYS" alignment="CENTER">
+                            <HBox alignment="CENTER" spacing="10.0">
+                                <Label text="Posición" styleClass="board-title"/>
+                                <Label text="JUGADOR" styleClass="board-tag"/>
+                            </HBox>
+                            <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
+
+                                <Pane fx:id="playerBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
+                            </StackPane>
                         </VBox>
-                    </placeholder>
-                </ListView>
-                <!-- Sin uso en la pantalla de batalla: la flota ya quedó fijada en HU-1 -->
-                <Button fx:id="startGameButton" maxWidth="Infinity" text="Comenzar" visible="false" managed="false"/>
-            </VBox>
 
-            <Separator/>
+                        <VBox spacing="10.0" styleClass="board-section" HBox.hgrow="ALWAYS" alignment="CENTER">
+                            <HBox alignment="CENTER" spacing="10.0">
+                                <Label text="Radar" styleClass="board-title"/>
+                                <Label text="MÁQUINA" styleClass="board-tag enemy-tag"/>
+                            </HBox>
+                            <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
 
-            <VBox spacing="10.0">
-                <CheckBox fx:id="showEnemyBoardCheckBox" text="Ver flota enemiga (verificación)"/>
-            </VBox>
-
-            <VBox spacing="9.0" VBox.vgrow="ALWAYS">
-                <Label text="Leyenda" styleClass="section-title"/>
-                <GridPane hgap="10.0" vgap="9.0">
-                    <columnConstraints>
-                        <ColumnConstraints minWidth="32.0" prefWidth="32.0"/>
-                        <ColumnConstraints hgrow="ALWAYS"/>
-                    </columnConstraints>
-                    <Rectangle arcHeight="4.0" arcWidth="4.0" fill="#4b5563" height="18.0" width="28.0"/>
-                    <Label text="Barco" GridPane.columnIndex="1"/>
-                    <Text text="X" styleClass="water-mark" GridPane.rowIndex="1"/>
-                    <Label text="Agua" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                    <Circle fill="#f59e0b" radius="8.0" GridPane.rowIndex="2"/>
-                    <Label text="Tocado" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                    <Rectangle arcHeight="4.0" arcWidth="4.0" fill="#991b1b" height="18.0" width="28.0" GridPane.rowIndex="3"/>
-                    <Label text="Hundido" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                </GridPane>
-            </VBox>
-        </VBox>
-    </left>
-
-    <center>
-        <VBox spacing="0.0" styleClass="content">
-            <padding>
-                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
-            </padding>
-
-            <HBox spacing="12.0" VBox.vgrow="ALWAYS">
-                <VBox spacing="10.0" styleClass="board-section" HBox.hgrow="ALWAYS">
-                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                        <Label text="Posicion" styleClass="board-title"/>
-                        <Label text="Jugador" styleClass="board-tag"/>
+                                <Pane fx:id="enemyBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
+                            </StackPane>
+                        </VBox>
                     </HBox>
-                    <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
-                        <!-- GameBoardController mete aqui un
-                             BoardView(humanBoard, BoardRenderMode.OWNER_VIEW).getView() -->
-                        <Pane fx:id="playerBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
-                    </StackPane>
-                </VBox>
 
-                <VBox spacing="10.0" styleClass="board-section" HBox.hgrow="ALWAYS">
-                    <HBox alignment="CENTER_LEFT" spacing="10.0">
-                        <Label text="Principal" styleClass="board-title"/>
-                        <Label text="Maquina" styleClass="board-tag"/>
-                    </HBox>
-                    <StackPane styleClass="board-frame" VBox.vgrow="ALWAYS">
-                        <!-- GameBoardController mete aqui un
-                             BoardView(machineBoard, BoardRenderMode.FOG_VIEW).getView()
-                             y engancha setOnCellClicked(...) para HU-2. -->
-                        <Pane fx:id="enemyBoardPane" prefHeight="380.0" prefWidth="380.0" styleClass="board-pane"/>
-                    </StackPane>
                 </VBox>
-            </HBox>
-
-        </VBox>
-    </center>
-</BorderPane>
+            </center>
+        </BorderPane>
+    </content>
+</ScrollPane>

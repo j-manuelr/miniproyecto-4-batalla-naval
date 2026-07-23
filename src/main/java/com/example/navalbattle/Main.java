@@ -14,7 +14,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
 
-        stage.setTitle("Batalla Naval - Menú Principal");
+        stage.setTitle("Batalla Naval");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
